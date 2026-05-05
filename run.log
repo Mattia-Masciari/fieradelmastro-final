@@ -1,0 +1,26 @@
+
+> fiera-del-mastro@1.0.0 dev
+> next dev -p 3001 -H 127.0.0.1
+
+node:fs:442
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ETIMEDOUT: connection timed out, read
+    at Object.readFileSync (node:fs:442:20)
+    at defaultLoadImpl (node:internal/modules/cjs/loader:1124:17)
+    at loadSource (node:internal/modules/cjs/loader:1757:20)
+    at Object..js (node:internal/modules/cjs/loader:1889:44)
+    at Module.load (node:internal/modules/cjs/loader:1465:32)
+    at Function._load (node:internal/modules/cjs/loader:1282:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1487:12)
+    at mod.require (/Users/mattiamasciari/Documents/🤖 APP & AI/FIERA DEL MASTRO - WS/frontend/node_modules/next/dist/server/require-hook.js:68:28) {
+  errno: -60,
+  code: 'ETIMEDOUT',
+  syscall: 'read'
+}
+
+Node.js v22.16.0
+[?25h
