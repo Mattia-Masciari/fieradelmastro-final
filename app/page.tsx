@@ -142,8 +142,8 @@ export default function Home() {
 
         steps.forEach((step: any, i) => {
           if (i < steps.length - 1) {
-            const currentStep = steps[i];
-            const nextStep = steps[i + 1];
+            const currentStep = steps[i] as any;
+            const nextStep = steps[i + 1] as any;
 
             tl.to(currentStep, { autoAlpha: 0, scale: 0.95, duration: 1.5, ease: 'power2.inOut' }, `step-${i}`)
               .to({}, { duration: 0.5 })
