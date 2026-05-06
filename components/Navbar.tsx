@@ -11,7 +11,7 @@ export default function Navbar() {
   useGSAP(() => {
     if (isMenuOpen) {
       gsap.fromTo(dropdownRef.current,
-        { opacity: 0, y: -10, scaleY: 0.8, transformOrigin: 'top right' },
+        { opacity: 0, y: -10, scaleY: 0.8, transformOrigin: 'top left' },
         { opacity: 1, y: 0, scaleY: 1, duration: 0.4, ease: 'power4.out' }
       );
     }
@@ -19,11 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-16 py-1 md:py-2 bg-[#fcf9f8]/90 backdrop-blur-xl transition-all duration-500 border-b border-stone-100/50">
-      <div className="flex items-center gap-12">
-        <Link href="/" className="text-xl md:text-2xl font-serif font-semibold tracking-tight uppercase text-[#035AA6]">
-          FIERA DEL MASTRO
-        </Link>
-      </div>
+      {/* Left: Menu Trigger (FDM Trademark) */}
       <div className="flex items-center gap-6">
         <div className="relative">
           <button
@@ -42,10 +38,10 @@ export default function Navbar() {
           {isMenuOpen && (
             <div
               ref={dropdownRef}
-              className="absolute top-full right-0 mt-4 bg-surface border border-stone-200 shadow-xl py-8 px-6 md:py-6 md:px-5 w-48 md:w-32 flex flex-col gap-6 z-[60] backdrop-blur-sm items-end"
+              className="absolute top-full left-0 mt-4 bg-[#fcf9f8] border border-stone-200 shadow-xl py-8 px-6 md:py-6 md:px-5 w-48 md:w-32 flex flex-col gap-6 z-[60] backdrop-blur-sm items-start"
             >
               {/* Navigation Links */}
-              <div className="flex flex-col gap-6 md:gap-4 w-full items-end text-right">
+              <div className="flex flex-col gap-6 md:gap-4 w-full items-start text-left">
                 <Link href="/" onClick={() => setIsMenuOpen(false)} className="block w-full text-[#035AA6] font-normal text-xs md:text-[10px] uppercase tracking-[0.2em] py-2 md:py-0">
                   Manifesto
                 </Link>
@@ -59,6 +55,13 @@ export default function Navbar() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Right: Brand Wordmark */}
+      <div className="flex items-center gap-12">
+        <Link href="/" className="text-xl md:text-2xl font-serif font-semibold tracking-tight uppercase text-[#035AA6]">
+          FIERA DEL MASTRO
+        </Link>
       </div>
     </nav>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -15,6 +15,29 @@ export default function Home() {
   const rawHandsRef = useRef<HTMLSpanElement>(null);
   const infiniteVisionRef = useRef<HTMLSpanElement>(null);
 
+  const [loadedCount, setLoadedCount] = useState(0);
+  const totalAssets = 22; // 8 videos + 14 images
+
+  const handleAssetLoaded = () => {
+    setLoadedCount((prev) => {
+      const next = prev + 1;
+      if (next >= totalAssets) {
+        window.dispatchEvent(new CustomEvent('hero-assets-ready'));
+      }
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    // Fail-safe in case some media assets take too long or fail to trigger load events
+    const failSafe = setTimeout(() => {
+      console.warn("Hero assets load fail-safe triggered.");
+      window.dispatchEvent(new CustomEvent('hero-assets-ready'));
+    }, 5500);
+
+    return () => clearTimeout(failSafe);
+  }, []);
+
   useGSAP(() => {
     let mm = gsap.matchMedia();
 
@@ -24,23 +47,30 @@ export default function Home() {
     }, (context) => {
       let { isDesktop, isMobile } = context.conditions as any;
 
+      // Set initial opacity of texts to 0 on mount to avoid flashing
+      gsap.set([rawHandsRef.current, infiniteVisionRef.current], { opacity: 0 });
+
       // 1. Hero Entrance Animation
-      const entranceTl = gsap.timeline();
-      entranceTl.from(rawHandsRef.current, {
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out',
-      })
-      .from(infiniteVisionRef.current, {
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power4.out',
-      }, 3.5)
-      .fromTo('.group-0',
-        { y: 40, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 1.5, ease: 'power4.out', stagger: 0.1 },
-        3.5
-      );
+      const handleLoaderFinished = () => {
+        const entranceTl = gsap.timeline();
+        entranceTl.to(rawHandsRef.current, {
+          opacity: 1,
+          duration: 1.5,
+          ease: 'power4.out',
+        })
+        .to(infiniteVisionRef.current, {
+          opacity: 1,
+          duration: 1.5,
+          ease: 'power4.out',
+        }, "+=1.0") // Starts exactly 1.0 second after Raw Hands completes
+        .fromTo('.group-0',
+          { y: 40, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 1.5, ease: 'power4.out', stagger: 0.1 },
+          "<" // Starts at the same time as Infinite Vision
+        );
+      };
+
+      window.addEventListener('loader-finished', handleLoaderFinished);
 
       // 2. Hero 2D Scatter Sequence
       if (heroRef.current) {
@@ -157,6 +187,10 @@ export default function Home() {
           }
         });
       }
+
+      return () => {
+        window.removeEventListener('loader-finished', handleLoaderFinished);
+      };
     });
   }, { scope: containerRef });
 
@@ -214,11 +248,11 @@ export default function Home() {
                 style={{ zIndex: 100 - groupIdx }}
               >
                 {item.type === 'video' ? (
-                  <video autoPlay loop muted playsInline className="hero-asset-media w-full h-full object-cover">
+                  <video autoPlay loop muted playsInline onLoadedData={handleAssetLoaded} className="hero-asset-media w-full h-full object-cover">
                     <source src={item.src} type="video/mp4" />
                   </video>
                 ) : (
-                  <img src={item.src} alt={`Hero context ${i}`} className="hero-asset-media w-full h-full object-cover" />
+                  <img src={item.src} alt={`Hero context ${i}`} onLoad={handleAssetLoaded} className="hero-asset-media w-full h-full object-cover" />
                 )}
               </div>
             );
