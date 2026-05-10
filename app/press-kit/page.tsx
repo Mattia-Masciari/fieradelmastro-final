@@ -100,7 +100,7 @@ export default function PressKit() {
                 For all media inquiries, interview requests, or high-resolution asset access, please contact our editorial team.
               </p>
               <p className="font-semibold text-xl">
-                Contact: <a href="mailto:fieradelmastro@gmail.com" className="underline hover:text-[#035AA6] transition-colors">fieradelmastro@gmail.com</a>
+                Contact: <a href="mailto:info@fieradelmastro.com" className="underline hover:text-[#035AA6] transition-colors">info@fieradelmastro.com</a>
               </p>
             </div>
           </section>

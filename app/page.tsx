@@ -389,7 +389,7 @@ export default function Home() {
             </div>
             <div className="mt-32 md:mt-0">
               <p className="text-sm mb-4 text-stone-500 uppercase tracking-widest font-medium">Contact</p>
-              <a href="mailto:fieradelmastro@gmail.com" className="block text-sm mb-4 text-white font-normal hover:text-[#A68B03] transition-colors duration-500 cursor-none">fieradelmastro@gmail.com</a>
+              <a href="mailto:info@fieradelmastro.com" className="block text-sm mb-4 text-white font-normal hover:text-[#A68B03] transition-colors duration-500 cursor-none">info@fieradelmastro.com</a>
               <div className="flex flex-col gap-4 mt-8">
                 <a href="https://www.instagram.com/fieradelmastro/" target="_blank" rel="noopener noreferrer" className="text-sm text-white font-normal hover:text-[#A68B03] transition-colors duration-500 cursor-none flex items-center gap-2">
                   <span className="opacity-40 uppercase tracking-tighter text-[10px]">IG</span> @fieradelmastro

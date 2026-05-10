@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
                 Fiera del Mastro (hereafter "FDM") does not merely collect data; it acts as the Custodian of the information it receives. Every fragment of data is treated with the same surgical care a Mastro reserves for Raw Matter before its Resurrection.
               </p>
               <p className="font-semibold">
-                Contact: <a href="mailto:fieradelmastro@gmail.com" className="underline hover:text-[#035AA6] transition-colors">fieradelmastro@gmail.com</a>
+                Contact: <a href="mailto:info@fieradelmastro.com" className="underline hover:text-[#035AA6] transition-colors">info@fieradelmastro.com</a>
               </p>
             </div>
           </section>
