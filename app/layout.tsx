@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 import LoadingScreen from '../components/LoadingScreen';
 
 export const metadata: Metadata = {
-  title: 'Fiera del Mastro',
-  description: 'Raw hands. Infinite vision.',
+  title: 'Fiera del Mastro — Radical Luxury from Calabria | Raw Hands. Infinite Vision.',
+  description: 'Fiera del Mastro transforms raw Calabrian matter — marine wood, Sila granite, coastal iron — into collectible authorial Opus. Material resurrection for architects, collectors, and radical luxury patrons.',
   icons: {
     icon: [
       { url: '/icon.svg?v=3', type: 'image/svg+xml' },
